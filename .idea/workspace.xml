@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="073dfd40-e3eb-4c35-9cac-a1a8f14a2061" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/boilerplate.html" afterPath="$PROJECT_DIR$/boilerplate.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/three.ar.js" afterPath="$PROJECT_DIR$/dist/three.ar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reticle.html" afterPath="$PROJECT_DIR$/reticle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spawn-at-camera.html" afterPath="$PROJECT_DIR$/spawn-at-camera.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spawn-at-surface.html" afterPath="$PROJECT_DIR$/spawn-at-surface.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -232,12 +227,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1504085870102</updated>
-      <workItem from="1504085871577" duration="1825000" />
+      <workItem from="1504085871577" duration="2421000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1825000" />
+    <option name="totallyTimeSpent" value="2421000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
