@@ -1,23 +1,12 @@
 <!--
 /*
- * Copyright 2017 Google Inc. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * author zhangrui
  */
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>three.ar.js - Boilerplate</title>
+  <title>three.ar.js - 示例</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no,
   minimum-scale=1.0, maximum-scale=1.0">
@@ -45,8 +34,8 @@
       text-align: center;
     }
     #info a, #info .title {
-      padding: 0.4em 0.6em;
-      border-radius: 0.1em;
+      padding: 0.5em 2em;
+      border-radius: 0.3em;
     }
     #info a {
       color: rgba(255, 255, 255, 0.8);
@@ -68,25 +57,43 @@
 </head>
 <body>
 <div id="info">
-    <a href="https://github.com/google-ar/three.ar.js">three.ar.js</a><span class="title">Boilerplate scene</span>
+    <a href="https://zhangrui.name">博客</a><a href="http://172.16.8.250/index.html">主页</a>
 </div>
 <script src="../third_party/three.js/three.js"></script>
 <script src="../third_party/three.js/VRControls.js"></script>
 <script src="../dist/three.ar.js"></script>
 <script>
 
-var vrDisplay, vrControls, arView;
+var vrDisplay;
+
+var vrControls;
+
+var arView;
+
 var canvas, camera, scene, renderer;
+
+//格子之间的间隔
 var BOX_DISTANCE = 1.5;
-var BOX_SIZE = 0.25;
-var BOX_QUANTITY = 6;
+
+//格子大小
+var BOX_SIZE = 0.5;
+
+//格子数量
+var BOX_QUANTITY = 5;
+
+//格子是否已经被添加
 var boxesAdded = false;
 
+//格子集合
+var boxAry = [];
+
+var cameraPosition;
+
+//摄像机位置
+var cameraPosition;
+
 /**
- * Use the `getARDisplay()` utility to leverage the WebVR API
- * to see if there are any AR-capable WebVR VRDisplays. Returns
- * a valid display if found. Otherwise, display the unsupported
- * browser message.
+ * 检测浏览器是否支持AR
  */
 THREE.ARUtils.getARDisplay().then(function (display) {
   if (display) {
@@ -97,26 +104,32 @@ THREE.ARUtils.getARDisplay().then(function (display) {
   }
 });
 
+/**
+ * 初始化
+ */
 function init() {
   // Setup the three.js rendering environment
   renderer = new THREE.WebGLRenderer({ alpha: true });
+  
+  //设置设备像素比
   renderer.setPixelRatio(window.devicePixelRatio);
+  
+  //设置尺寸为窗口的文档显示区的高度和宽度
   renderer.setSize(window.innerWidth, window.innerHeight);
+  
   renderer.autoClear = false;
+  
   canvas = renderer.domElement;
+  
+  //添加AR显示区
   document.body.appendChild(canvas);
+  
   scene = new THREE.Scene();
 
-  // Creating the ARView, which is the object that handles
-  // the rendering of the camera stream behind the three.js
-  // scene
+  //实例化ARView（AR场景）
   arView = new THREE.ARView(vrDisplay, renderer);
 
-  // The ARPerspectiveCamera is very similar to THREE.PerspectiveCamera,
-  // except when using an AR-capable browser, the camera uses
-  // the projection matrix provided from the device, so that the
-  // perspective camera's depth planes and field of view matches
-  // the physical camera on the device.
+  //实例化摄像机
   camera = new THREE.ARPerspectiveCamera(
     vrDisplay,
     60,
@@ -125,14 +138,19 @@ function init() {
     vrDisplay.depthFar
   );
 
-  // VRControls is a utility from three.js that applies the device's
-  // orientation/position to the perspective camera, keeping our
-  // real world and virtual world in sync.
+  cameraPosition = camera.position;
+
+  //VRControls是three.js的一个类库，用来应用设备的方向、位置于摄像机，保持现实世界和虚拟世界同步
   vrControls = new THREE.VRControls(camera);
 
   // Bind our event handlers
   window.addEventListener('resize', onWindowResize, false);
 
+  // 方块没有被创建并且摄像机Y坐标不为undefined或0
+  if (!boxesAdded && !camera.position.y) {
+    addBoxes();
+  }
+  
   // Kick off the render loop!
   update();
 }
@@ -141,31 +159,27 @@ function init() {
  * The render loop, called once per frame. Handles updating
  * our scene and rendering.
  */
+ /**
+  * 渲染循环，每帧调用一次
+  * 处理场景和渲染
+  */
 function update() {
-  // Update our camera projection matrix in the event that
-  // the near or far planes have updated
+  // 更新摄像机投影矩阵
   camera.updateProjectionMatrix();
 
-  // Update our perspective camera's positioning
+  // 更新摄像机位置
   vrControls.update();
 
-  // If we have not added boxes yet, and we have positional
-  // information applied to our camera (it can take a few seconds),
-  // and the camera's Y position is not undefined or 0, create boxes
-  //if (!boxesAdded && !camera.position.y) {
-  //if (!boxesAdded) {
-    addBoxes();
-  //}
-
-  // Render the device's camera stream on screen
+  // 在屏幕上渲染设备的摄像头
   arView.render();
 
-  // Render our three.js virtual scene
-  //renderer.clearDepth();
+  //清楚深度数据
+  renderer.clearDepth();
+  
+  // 渲染虚拟场景
   renderer.render(scene, camera);
 
-  // Kick off the requestAnimationFrame to call this function
-  // on the next frame
+  //下一帧调用update
   requestAnimationFrame(update);
 }
 
@@ -193,6 +207,9 @@ function addBoxes () {
     var cube = new THREE.Mesh(geometry, material);
     cube.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
     scene.add(cube);
+	
+	
+
   }
 
   // Flip this switch so that we only perform this once

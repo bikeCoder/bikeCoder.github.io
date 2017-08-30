@@ -110,8 +110,8 @@ var LEARN_MORE_LINK = 'https://developers.google.com/ar/develop/web/getting-star
                                                                                        * See the License for the specific language governing permissions and
                                                                                        * limitations under the License.
                                                                                        */
+var UNSUPPORTED_MESSAGE = '您的浏览器不支持Google ARCore。 <a href="' + LEARN_MORE_LINK + '">了解更多</a>.';
 
-var UNSUPPORTED_MESSAGE = 'This augmented reality experience requires WebARonARCore or WebARonARKit: experimental browsers from Google, available Android and iOS. Learn more <a href="' + LEARN_MORE_LINK + '">here</a>.';
 
 THREE.ARUtils = Object.create(null);
 
