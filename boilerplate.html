@@ -152,7 +152,8 @@ function update() {
   // If we have not added boxes yet, and we have positional
   // information applied to our camera (it can take a few seconds),
   // and the camera's Y position is not undefined or 0, create boxes
-  if (!boxesAdded && !camera.position.y) {
+  //if (!boxesAdded && !camera.position.y) {
+  if (!boxesAdded) {
     addBoxes();
   }
 
