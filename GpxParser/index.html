@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="gpx vis" />
+	<title>GPX解析器</title>
+
+	<meta property="og:title" content="GPX - gps track log viewer" />
+	<meta property="og:description" content="Drag & drop your gpx track log to see it on the map. Everything happens in your browser, without data being sent to any server." />
+	<meta property="og:image" content="http://gpx.tomaskafka.com/img/thumbnail.png" />
+	<meta property="og:type" content="product" />
+	<meta property="og:url" content="http://gpx.tomaskafka.com" />
+	<meta property="og:site_name" content="GPX log viewer" />
+	<!--
+	<link rel="shortcut icon" href="/img/favicon/mobreactor.ico" type="image/x-icon" />
+	-->
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+	<link rel="stylesheet" href="css/joshuaclayton-blueprint-css-c20e981/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="css/joshuaclayton-blueprint-css-c20e981/blueprint/print.css" type="text/css" media="print" />
+	<link rel="stylesheet" href="css/joshuaclayton-blueprint-css-c20e981/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />
+	<!--[if lt IE 8]><link rel="stylesheet" href="/css/joshuaclayton-blueprint-css-c20e981/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
+	<link href='css/style.css' rel='stylesheet' type='text/css' />
+	<link href='css/layout.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<div id="mapwrapper">
+			<div id="map"></div>
+			<div id="dropalert">
+				<div id="dropalert-wrap">
+					<h1 >拖入GPX文件显示在地图上</h1>
+					<p>
+						支持的GPX信息: 轨迹, 路线, 路点.
+					</p>
+					<p>
+						解析程序只运行于浏览器中，不会上传至任何服务器。地图采用谷歌地图。拖入GPX文件以替换前一个文件。目前只支持Chrome浏览器和Firefoex浏览器。
+					</p>
+				</div>
+			</div>
+			<a id="promo" href="http://zhangrui.name">
+				<h2 class="alt"><span class="small">&copy;</span> Tomáš Kafka</h2>
+				<p class="subtitle">UX designer, Android developer. <span class="hireme">Hire me</span>.</p>
+			</a>
+		</div>
+		<div id="slopevis">
+			<div class="placeholder">坡度、速度将显示在这里。</div>
+		</div>
+		<div id="profilegraph">
+			<div class="placeholder">高度将显示在这里。</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.initDrop.js"></script>
+	<script type="text/javascript" src="js/functional/functional.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/raphael/raphael.min.js"></script>
+	<script type="text/javascript" src="js/Highcharts-2.1.3/js/highcharts.js"></script>
+	<!-- Replace the key in the line below with an API key for your site.  You can get one here http://www.google.com/apis/maps/signup.html -->
+	<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAMw1eIiRiYcqeGRfYM8s_IRR_fKCFj5k-4ZD4jBH294fElrtsQhQo580PLtuZXFYPFLoX-ZsKs0RhrQ" type="text/javascript"></script>
+	<script type="text/javascript" src="js/func.js"></script>
+	<script type="text/javascript" src="js/gpxtools/color.js"></script>
+	<script type="text/javascript" src="js/gpxtools/gpxtools.js"></script>
+	<script type="text/javascript" src="js/gpxtools/slopevis.js"></script>
+	<script type="text/javascript" src="js/gpxtools/profilevis.js"></script>
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-85545-2']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</body>
+</html>
